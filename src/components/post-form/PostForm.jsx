@@ -1,4 +1,4 @@
-import React, { useCallback,useState,useEffect } from "react";
+import React, { useCallback, useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { Button, Input, RTE, Select } from "..";
 import appwriteService from "../../appwrite/config";
@@ -9,7 +9,7 @@ import "../../App.css";
 import { motion } from 'framer-motion';
 
 export default function PostForm({ post }) {
-    const [loading,setLoading] = React.useState(true);
+    const [loading, setLoading] = React.useState(true);
 
     const { register, handleSubmit, watch, setValue, control, getValues } = useForm({
         defaultValues: {
@@ -24,6 +24,7 @@ export default function PostForm({ post }) {
     const userData = useSelector((state) => state.auth.userData);
 
     const submit = async (data) => {
+
         if (post) {
             const file = data.image[0] ? await appwriteService.uploadFile(data.image[0]) : null;
 
@@ -66,16 +67,16 @@ export default function PostForm({ post }) {
     }, []);
 
     const bounceAnimation = {
-        y: [0, -10, 0], 
+        y: [0, -10, 0],
         transition: {
             duration: 1.5,
             ease: "easeInOut",
-            repeat: Infinity, 
+            repeat: Infinity,
         },
-        
+
     };
-    
-    
+
+
     React.useEffect(() => {
         const subscription = watch((value, { name }) => {
             if (name === "title") {
@@ -91,10 +92,10 @@ export default function PostForm({ post }) {
             setLoading(false);
         }, 1000); // Set loader duration to 2 seconds
 
-        return () => clearTimeout(timer); 
+        return () => clearTimeout(timer);
     }, []);
 
-    
+
     if (loading) {
         return <Loader />;
     }
@@ -102,28 +103,28 @@ export default function PostForm({ post }) {
     return (
         <form onSubmit={handleSubmit(submit)} className="flex flex-wrap">
             <motion.div
-                        initial="hidden"
-                        animate="visible"
-                        className="popup-box"
-                        style={{
-                            position: 'fixed',
-                            bottom: '25%',
-                            right: '10%',
-                            background: '#9149ff',
-                            padding: '15px',
-                            borderRadius: '8px',
-                            boxShadow: '0 4px 12px rgba(0, 0, 0, 0.1)',
-                            fontFamily: 'Poppins, sans-serif',
-                        }}
-                        animate={bounceAnimation} 
-                    >
-                        <motion.p
-                            whileHover={{ scale: 1.05 }}
-                            style={{ color: 'rgb(253, 253, 253)', fontSize: '16px', fontWeight: 'bold' }}
-                        >
-                            Submit or Update your post here!
-                        </motion.p>
-                    </motion.div>
+                initial="hidden"
+                animate="visible"
+                className="popup-box"
+                style={{
+                    position: 'fixed',
+                    bottom: '25%',
+                    right: '10%',
+                    background: '#9149ff',
+                    padding: '15px',
+                    borderRadius: '8px',
+                    boxShadow: '0 4px 12px rgba(0, 0, 0, 0.1)',
+                    fontFamily: 'Poppins, sans-serif',
+                }}
+                animate={bounceAnimation}
+            >
+                <motion.p
+                    whileHover={{ scale: 1.05 }}
+                    style={{ color: 'rgb(253, 253, 253)', fontSize: '16px', fontWeight: 'bold' }}
+                >
+                    Submit or Update your post here!
+                </motion.p>
+            </motion.div>
             <div className="w-2/3 px-2">
                 <Input
                     label="Title :"
@@ -153,7 +154,7 @@ export default function PostForm({ post }) {
                 {post && (
                     <div className="w-full mb-4">
                         <img
-                            src={appwriteService.getFilePreview("66d9b087003ad856493b",post.featuredImage)}
+                            src={appwriteService.getFilePreview("66d9b087003ad856493b", post.featuredImage)}
                             alt={post.title}
                             className="rounded-lg"
                         />
@@ -166,8 +167,8 @@ export default function PostForm({ post }) {
                     {...register("status", { required: true })}
                 />
                 <Button
-                type="submit"
-                className={`w-full text-white font-bold py-2 edit-btn px-4 rounded-lg transition duration-300 ease-in-out transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-offset-2
+                    type="submit"
+                    className={`w-full text-white font-bold py-2 edit-btn px-4 rounded-lg transition duration-300 ease-in-out transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-offset-2
                     ${post ? "focus:ring-red-500" : "focus:ring-green-500"}`}>{post ? 'Update' : 'Submit'}
                 </Button>
 

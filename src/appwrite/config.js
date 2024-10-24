@@ -1,5 +1,6 @@
 import conf from "../conf/conf";
 import { Client, ID, Databases, Storage, Query } from "appwrite";
+import authService from "./auth";
 
 export class Service {
   client = new Client();
@@ -78,7 +79,14 @@ export class Service {
   }
 
   async getPosts(slug) {
+    const currentUser = await authService.getCurrentUser();
     const queries = [Query.equal("status", "active")];
+    if (currentUser) {
+      queries.push(Query.equal("userId", currentUser.$id));
+    } else {
+      console.log("No user logged in. Fetching public posts.");
+      // If no user is logged in, fetch posts without filtering by userId
+    }
     try {
       return await this.databases.listDocuments(
         conf.appWriteDatabaseID,

@@ -15,7 +15,7 @@ export default function Post() {
     const userData = useSelector((state) => state.auth.userData);
     const [loader, setLoader] = useState(true);
 
-    const isAuthor = post && userData ? post.userId === userData.$id : false;
+    const isAuthor = post && userData && post.userId === userData.$id;
 
     useEffect(() => {
         if (slug) {
@@ -45,12 +45,10 @@ export default function Post() {
             navigate("/");
             setLoader(false);
         }
-        
+
     }, [slug, navigate]);
 
-    if (loader) {
-        return <Loader />;
-    }
+
 
     const deletePost = () => {
         if (post) {
@@ -67,24 +65,24 @@ export default function Post() {
         }
     };
 
-   const bounceAnimation = {
-    initial: { opacity: 0, y: 200 }, 
-    animate: {
-        opacity: 1,
-        y: 0, 
-        transition: {
-            type: "spring",
-            stiffness: 300,
-            damping: 20,
-            duration: 1, 
+    const bounceAnimation = {
+        initial: { opacity: 0, y: 200 },
+        animate: {
+            opacity: 1,
+            y: 0,
+            transition: {
+                type: "spring",
+                stiffness: 300,
+                damping: 20,
+                duration: 1,
+            },
         },
-    },
-    exit: {
-        opacity: 0,
-        y: 20,
-        transition: { duration: 0.9 },
-    },
-};
+        exit: {
+            opacity: 0,
+            y: 20,
+            transition: { duration: 0.9 },
+        },
+    };
 
     return post ? (
         <div className="py-8 bg-white post-bg bg-gradient-to-br from-[#e8dfff] to-[#ffebff]">
@@ -92,27 +90,27 @@ export default function Post() {
                 {/* Apply bounce animation to the image container */}
                 <div className="w-full flex justify-center mb-4 relative border bg-white p-2 custom-card">
                     <motion.div
-                    style={{ backgroundColor: '#9149ff' }}
-                    className="absolute left-[35%] top-[-25%] transform -translate-x-1/2 -translate-y-1/2 p-4 text-white rounded-lg shadow-lg glowing-border"
-                    animate={{
-                        y: [0, -10, 0],
-                    }}
-                    transition={{
-                        duration: 1,
-                        ease: "easeInOut",
-                        repeat: Infinity, 
-                        repeatType: "loop", 
-                    }} 
-                >
-                <p className="text-center">Edit or Delete your post here!</p>
-                </motion.div>
-                     <img
+                        style={{ backgroundColor: '#9149ff' }}
+                        className="absolute left-[35%] top-[-25%] transform -translate-x-1/2 -translate-y-1/2 p-4 text-white rounded-lg shadow-lg glowing-border"
+                        animate={{
+                            y: [0, -10, 0],
+                        }}
+                        transition={{
+                            duration: 1,
+                            ease: "easeInOut",
+                            repeat: Infinity,
+                            repeatType: "loop",
+                        }}
+                    >
+                        <p className="text-center">Edit or Delete your post here!</p>
+                    </motion.div>
+                    <img
                         src={appwriteService.getFilePreview(post.featuredImage)}
                         alt={post.title}
                         className="image-preview"
 
                     />
-                    
+
                     {isAuthor && (
                         <div className="absolute right-6 top-6">
                             <Link to={`/edit-post/${post.$id}`}>
@@ -125,8 +123,8 @@ export default function Post() {
                             </Button>
                         </div>
                     )}</div>
-                
-                
+
+
 
                 {/* Apply the same bounce animation to the featured-image-container and text */}
                 <motion.div

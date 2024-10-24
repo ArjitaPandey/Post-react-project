@@ -15,7 +15,7 @@ function SignUp() {
     const dispatch = useDispatch();
     const [error, setError] = useState('');
     const { register, handleSubmit } = useForm();
-    const [animationComplete,setAnimationComplete] = useState(false);
+    const [animationComplete, setAnimationComplete] = useState(false);
 
     const signUp = async (data) => {
         setError('');
@@ -35,14 +35,14 @@ function SignUp() {
 
     return (
         <div className="flex h-[92vh]">
-             <div className="relative hidden md:block w-1/2 bg-cover bg-center overflow-hidden" style={{ backgroundImage: `url(${SignUpImage})` }}>
+            <div className="relative hidden md:block w-1/2 bg-cover bg-center overflow-hidden" style={{ backgroundImage: `url(${SignUpImage})` }}>
                 <motion.img
                     src={animatedFigure}
-                    style = {{height:'25%'}}
+                    style={{ height: '25%' }}
                     alt="Cute Animated"
                     className="absolute bottom-0 left-0 w-1/3 h-1/3 object-contain opacity-80"
                     initial={{ x: '300%', opacity: 0 }}
-                    animate = {{x:'200%',opacity:1}}
+                    animate={{ x: '200%', opacity: 1 }}
                     transition={{
                         x: {
                             duration: 1, // Duration of the animation
@@ -58,15 +58,15 @@ function SignUp() {
                 />
                 {animationComplete && (
                     <motion.div
-                    style = {{backgroundColor:'#9149ff'}}
-                    className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 p-4 text-white rounded-lg shadow-lg glowing-border"
-                    initial={{ opacity: 0, y: -100 , x:180}}
-                    animate={{ opacity: 1, y: 90,x:180 }}
-                    transition={{ duration: 0.5, ease: "easeOut" }}
+                        style={{ backgroundColor: '#9149ff' }}
+                        className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 p-4 text-white rounded-lg shadow-lg glowing-border"
+                        initial={{ opacity: 0, y: -100, x: 180 }}
+                        animate={{ opacity: 1, y: 90, x: 180 }}
+                        transition={{ duration: 0.5, ease: "easeOut" }}
                     >
-                <p className="text-center">Sign up with this form!</p>
-                </motion.div>
-            )}
+                        <p className="text-center">Sign up with this form!</p>
+                    </motion.div>
+                )}
             </div>
 
             {/* Right Side: Form */}
