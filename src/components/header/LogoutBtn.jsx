@@ -1,9 +1,8 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import { useDispatch } from 'react-redux'
 import authService from '../../appwrite/auth';
 import { logout } from '../../store/authSlice';
-import Loader from "../../components/Loader";
-import { Navigate, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 
 function LogoutBtn() {

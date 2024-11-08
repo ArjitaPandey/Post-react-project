@@ -9,7 +9,7 @@ import "../../App.css";
 import { motion } from 'framer-motion';
 
 export default function PostForm({ post }) {
-    const [loading, setLoading] = React.useState(true);
+    const [loading, setLoading] = useState(true);
 
     const { register, handleSubmit, watch, setValue, control, getValues } = useForm({
         defaultValues: {
@@ -87,7 +87,7 @@ export default function PostForm({ post }) {
     };
 
 
-    React.useEffect(() => {
+    useEffect(() => {
         const subscription = watch((value, { name }) => {
             if (name === "title") {
                 setValue("slug", slugTransform(value.title), { shouldValidate: true });
@@ -114,7 +114,7 @@ export default function PostForm({ post }) {
         <form onSubmit={handleSubmit(submit)} className="flex flex-wrap">
             <motion.div
                 initial="hidden"
-                animate="visible"
+                // animate="visible"
                 className="popup-box"
                 style={{
                     position: 'fixed',

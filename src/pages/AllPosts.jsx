@@ -23,32 +23,28 @@ function AllPosts() {
         return <Loader />;
     }
 
-    const popupVariant = {
-        hidden: { y: 100, opacity: 0 },
-        visible: { y: 0, opacity: 1, transition: { type: "spring", bounce: 0.5, duration: 2 } },
-    };
 
     const bounceAnimation = {
         y: [0, -10, 0],
         transition: {
-            duration: 1.5, 
+            duration: 1.5,
             ease: "easeInOut",
-            repeat: Infinity, 
+            repeat: Infinity,
         },
-        
+
     };
 
     const bounceCardAnimation = {
         y: [0, -1, 0],
         transition: {
-            duration: 1, 
+            duration: 1,
             ease: "easeInOut",
-            repeat: Infinity, 
+            repeat: Infinity,
         },
-        
+
     };
 
-    
+
 
     return (
         <div className='w-full py-8 bg-gradient-to-br from-[#e8dfff] to-[#ffebff] h-[100vh]'>
@@ -56,7 +52,7 @@ function AllPosts() {
                 <div className='flex flex-wrap -mx-4'>
                     <motion.div
                         initial="hidden"
-                        animate="visible"
+                        // animate="visible"
                         className="popup-box"
                         style={{
                             position: 'fixed',
@@ -68,7 +64,7 @@ function AllPosts() {
                             boxShadow: '0 4px 12px rgba(0, 0, 0, 0.1)',
                             fontFamily: 'Poppins, sans-serif',
                         }}
-                        animate={bounceAnimation} 
+                        animate={bounceAnimation}
                     >
                         <motion.p
                             whileHover={{ scale: 1.05 }}
@@ -88,16 +84,16 @@ function AllPosts() {
                         alt="Cute Animated"
                         className="absolute w-1/3 h-1/3 object-contain opacity-80"
                         initial="hidden"
-                        animate={bounceAnimation} 
+                        animate={bounceAnimation}
                     />
                     {posts.map((post) => (
                         <div key={post.$id} className='p-4 w-full md:w-1/2 lg:w-1/4'>
                             <motion.div initial="hidden"
-                        animate="visible" animate={bounceCardAnimation}>
-                            <div className="bg-white rounded-lg shadow-md hover:shadow-lg transition duration-300 ease-in-out">
-                                <ProjectCard {...post} />
-                                
-                            </div>
+                                animate="visible" animate={bounceCardAnimation}>
+                                <div className="bg-white rounded-lg shadow-md hover:shadow-lg transition duration-300 ease-in-out">
+                                    <ProjectCard {...post} />
+
+                                </div>
                             </motion.div>
                         </div>
                     ))}
