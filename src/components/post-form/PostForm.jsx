@@ -24,34 +24,44 @@ export default function PostForm({ post }) {
     const userData = useSelector((state) => state.auth.userData);
 
     const submit = async (data) => {
+        if (!userData) {
+            console.error("User data is not available.");
+            return;
+        }
 
-        if (post) {
-            const file = data.image[0] ? await appwriteService.uploadFile(data.image[0]) : null;
+        try {
+            if (post) {
+                const file = data.image && data.image[0] ? await appwriteService.uploadFile(data.image[0]) : null;
 
-            if (file) {
-                appwriteService.deleteFile(post.featuredImage);
-            }
+                if (file && post.featuredImage) {
+                    await appwriteService.deleteFile(post.featuredImage);
+                }
 
-            const dbPost = await appwriteService.updatePost(post.$id, {
-                ...data,
-                featuredImage: file ? file.$id : undefined,
-            });
-
-            if (dbPost) {
-                navigate(`/post/${dbPost.$id}`);
-            }
-        } else {
-            const file = await appwriteService.uploadFile(data.image[0]);
-
-            if (file) {
-                const fileId = file.$id;
-                data.featuredImage = fileId;
-                const dbPost = await appwriteService.createPost({ ...data, userId: userData.$id });
+                const dbPost = await appwriteService.updatePost(post.$id, {
+                    ...data,
+                    featuredImage: file ? file.$id : post.featuredImage,
+                });
 
                 if (dbPost) {
                     navigate(`/post/${dbPost.$id}`);
                 }
+            } else {
+                const file = data.image && data.image[0] ? await appwriteService.uploadFile(data.image[0]) : null;
+
+                if (file) {
+                    const fileId = file.$id;
+                    data.featuredImage = fileId;
+
+                    const dbPost = await appwriteService.createPost({ ...data, userId: userData.$id });
+                    if (dbPost) {
+                        navigate(`/post/${dbPost.$id}`);
+                    }
+                } else {
+                    console.error("Image file is required to create a new post.");
+                }
             }
+        } catch (error) {
+            console.error("Error in submit function:", error);
         }
     };
 
