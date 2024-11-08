@@ -52,7 +52,6 @@ function AllPosts() {
                 <div className='flex flex-wrap -mx-4'>
                     <motion.div
                         initial="hidden"
-                        // animate="visible"
                         className="popup-box"
                         style={{
                             position: 'fixed',
@@ -89,7 +88,7 @@ function AllPosts() {
                     {posts.map((post) => (
                         <div key={post.$id} className='p-4 w-full md:w-1/2 lg:w-1/4'>
                             <motion.div initial="hidden"
-                                animate="visible" animate={bounceCardAnimation}>
+                                animate={bounceCardAnimation}>
                                 <div className="bg-white rounded-lg shadow-md hover:shadow-lg transition duration-300 ease-in-out">
                                     <ProjectCard {...post} />
 

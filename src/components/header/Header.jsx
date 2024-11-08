@@ -2,14 +2,13 @@
 import { Container, LogoutBtn, Logo } from "../index";
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { logout } from '../../store/authSlice';
-import { useNavigate,useLocation } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import "../../App.css";
 
 function Header() {
     const authStatus = useSelector((state) => state.auth.status);
     const navigate = useNavigate();
-    const location = useLocation(); 
+    const location = useLocation();
 
     const navItems = [
         {
@@ -74,7 +73,7 @@ function Header() {
                     <div className="md:hidden flex items-center">
                         <button
                             className="nav-bar-text focus:outline-none"
-                            onClick={() => console.log('Toggle mobile menu')} 
+                            onClick={() => console.log('Toggle mobile menu')}
                         >
                             <svg
                                 className="w-6 h-6"

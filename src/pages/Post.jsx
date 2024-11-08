@@ -12,7 +12,7 @@ export default function Post() {
     const { slug } = useParams();
     const navigate = useNavigate();
     const userData = useSelector((state) => state.auth.userData);
-    const [loader, setLoader] = useState(true);
+    // const [loader, setLoader] = useState(true);
 
     const isAuthor = post && userData && post.userId === userData.$id;
 
@@ -29,20 +29,20 @@ export default function Post() {
                         console.log("No post found with this slug, navigating to home.");
                         navigate("/");
                     }
-                    setLoader(false);
+                    // setLoader(false);
                 } else {
                     console.log("No posts found in response, navigating to home.");
                     navigate("/");
-                    setLoader(false);
+                    // setLoader(false);
                 }
             }).catch((error) => {
                 console.error("Error fetching posts:", error);
                 navigate("/");
-                setLoader(false);
+                // setLoader(false);
             });
         } else {
             navigate("/");
-            setLoader(false);
+            // setLoader(false);
         }
 
     }, [slug, navigate]);
