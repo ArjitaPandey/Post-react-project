@@ -31,6 +31,7 @@ export default function PostForm({ post }) {
 
         try {
             if (post) {
+                //update
                 const file = data.image && data.image[0] ? await appwriteService.uploadFile(data.image[0]) : null;
 
                 if (file && post.featuredImage) {
@@ -46,6 +47,8 @@ export default function PostForm({ post }) {
                     navigate(`/post/${dbPost.$id}`);
                 }
             } else {
+                //submit new post
+                //uploaded the image and file
                 const file = data.image && data.image[0] ? await appwriteService.uploadFile(data.image[0]) : null;
 
                 if (file) {
@@ -135,7 +138,7 @@ export default function PostForm({ post }) {
                     Submit or Update your post here!
                 </motion.p>
             </motion.div>
-            <div className="w-2/3 px-2">
+            <div className="w-full md:w-2/3 px-2 flex flex-wrap gap-4">
                 <Input
                     label="Title :"
                     placeholder="Title"
@@ -153,7 +156,7 @@ export default function PostForm({ post }) {
                 />
                 <RTE label="Content :" name="content" control={control} defaultValue={getValues("content")} />
             </div>
-            <div className="w-1/3 px-2">
+            <div className="md:w-1/3 px-2">
                 <Input
                     label="Featured Image :"
                     type="file"

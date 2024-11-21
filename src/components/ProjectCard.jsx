@@ -27,10 +27,11 @@ function ProjectCard({ $id, title, featuredImage }) {
             initial="hidden"
             animate="visible"
             exit="hidden"
-            whileHover={{ scale: 1.05 }} 
+            whileHover={{ scale: 1.05 }}
+        // className='animation-posts'
         >
             <Link to={`/post/${$id}`}>
-                <Card sx={{ maxWidth: 345 }}>
+                <Card>
                     <motion.div variants={imageVariant}>
                         <CardMedia
                             component="img"

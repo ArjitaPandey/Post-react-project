@@ -9,6 +9,7 @@ import animatedFigure from "../../src/assets/images/animatedGirlImage.png";
 function AllPosts() {
     const [posts, setPosts] = useState([]);
     const [loading, setLoading] = useState(true);
+    // const [isDesktop, setIsDesktop] = useState(window.innerWidth > 768);
 
     useEffect(() => {
         appwriteService.getPosts([]).then((posts) => {
@@ -49,10 +50,11 @@ function AllPosts() {
     return (
         <div className='w-full py-8 bg-gradient-to-br from-[#e8dfff] to-[#ffebff] h-[100vh]'>
             <Container>
-                <div className='flex flex-wrap -mx-4'>
+                <div className='flex flex-wrap -mx-4 image-posts'>
                     <motion.div
                         initial="hidden"
                         className="popup-box"
+
                         style={{
                             position: 'fixed',
                             bottom: '25%',
@@ -67,6 +69,7 @@ function AllPosts() {
                     >
                         <motion.p
                             whileHover={{ scale: 1.05 }}
+                            className='animation-posts'
                             style={{ color: 'rgb(253, 253, 253)', fontSize: '16px', fontWeight: 'bold' }}
                         >
                             Click on Add Post for more such posts!
@@ -81,7 +84,7 @@ function AllPosts() {
                             right: '10%',
                         }}
                         alt="Cute Animated"
-                        className="absolute w-1/3 h-1/3 object-contain opacity-80"
+                        className="absolute w-1/3 h-1/3 object-contain opacity-80 animation-posts"
                         initial="hidden"
                         animate={bounceAnimation}
                     />
@@ -103,3 +106,5 @@ function AllPosts() {
 }
 
 export default AllPosts;
+
+

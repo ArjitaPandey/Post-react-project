@@ -12,6 +12,7 @@ export default function Post() {
     const { slug } = useParams();
     const navigate = useNavigate();
     const userData = useSelector((state) => state.auth.userData);
+
     // const [loader, setLoader] = useState(true);
 
     const isAuthor = post && userData && post.userId === userData.$id;
@@ -90,7 +91,7 @@ export default function Post() {
                 <div className="w-full flex justify-center mb-4 relative border bg-white p-2 custom-card">
                     <motion.div
                         style={{ backgroundColor: '#9149ff' }}
-                        className="absolute left-[35%] top-[-25%] transform -translate-x-1/2 -translate-y-1/2 p-4 text-white rounded-lg shadow-lg glowing-border"
+                        className="absolute top-[-5%] transform -translate-x-1/2 -translate-y-1/2 p-4 text-white rounded-lg shadow-lg glowing-border"
                         animate={{
                             y: [0, -10, 0],
                         }}
@@ -111,7 +112,7 @@ export default function Post() {
                     />
 
                     {isAuthor && (
-                        <div className="absolute right-6 top-6">
+                        <div className="absolute right-6 top-6 button-container">
                             <Link to={`/edit-post/${post.$id}`}>
                                 <Button className="mr-3 post-btns" id="edit-btn">
                                     Edit

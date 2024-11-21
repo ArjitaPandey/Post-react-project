@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { login as authLogin } from '../store/authSlice';
 import { Button, Logo, Input } from "../components/index";
@@ -7,14 +7,14 @@ import authService from '../appwrite/auth';
 import { useForm } from 'react-hook-form';
 import LoginImage from "../assets/images/LoginImage.jpg";
 import Loader from "../components/Loader";
-import { motion } from 'framer-motion'; 
+import { motion } from 'framer-motion';
 
 function Login() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const { register, handleSubmit } = useForm();
     const [error, setError] = useState("");
-    const [loading,setLoading] = useState(true);
+    const [loading, setLoading] = useState(true);
 
     const login = async (data) => {
         setError("");
@@ -37,7 +37,7 @@ function Login() {
             setLoading(false);
         }, 1000); // Set loader duration to 2 seconds
 
-        return () => clearTimeout(timer); 
+        return () => clearTimeout(timer);
     }, []);
 
 
@@ -46,17 +46,17 @@ function Login() {
     }
 
     return (
-        <div className="flex h-[90vh]">
+        <div className="flex min-h-screen">
             {/* Left Side: Image */}
-            <div className="hidden md:block w-1/2 bg-cover bg-center" style={{backgroundImage : `url(${LoginImage})`}}>
-            <motion.div
-                    style = {{backgroundColor:'#9149ff'}}
+            <div className="hidden md:block w-1/2 bg-cover bg-center" style={{ backgroundImage: `url(${LoginImage})` }}>
+                <motion.div
+                    style={{ backgroundColor: '#9149ff' }}
                     className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 p-4 text-white rounded-lg shadow-lg glowing-border"
-                    initial={{ opacity: 0, y: -400, x:-100 }}
-                    animate={{ opacity: 1, y: -280 , x:-100}}
+                    initial={{ opacity: 0, y: -400, x: -100 }}
+                    animate={{ opacity: 1, y: -280, x: -100 }}
                     transition={{ duration: 1, ease: "easeOut" }}
-                    >
-                <p className="text-center">Sign in using your credentials!</p>
+                >
+                    <p className="text-center">Sign in using your credentials!</p>
                 </motion.div>
             </div>
 

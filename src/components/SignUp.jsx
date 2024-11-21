@@ -34,13 +34,13 @@ function SignUp() {
     };
 
     return (
-        <div className="flex h-[92vh]">
-            <div className="relative hidden md:block w-1/2 bg-cover bg-center overflow-hidden" style={{ backgroundImage: `url(${SignUpImage})` }}>
+        <div className="flex min-h-screen">
+            <div className="relative hidden lg:block w-1/2 bg-cover bg-center overflow-hidden" style={{ backgroundImage: `url(${SignUpImage})` }}>
                 <motion.img
                     src={animatedFigure}
-                    style={{ height: '25%' }}
+                    style={{ height: '25%', zIndex: '100' }}
                     alt="Cute Animated"
-                    className="absolute bottom-0 left-0 w-1/3 h-1/3 object-contain opacity-80"
+                    className="absolute bottom-0 left-0 w-1/3 h-1/3 object-contain opacity-80 girl-popup-container"
                     initial={{ x: '300%', opacity: 0 }}
                     animate={{ x: '200%', opacity: 1 }}
                     transition={{
@@ -58,8 +58,8 @@ function SignUp() {
                 />
                 {animationComplete && (
                     <motion.div
-                        style={{ backgroundColor: '#9149ff' }}
-                        className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 p-4 text-white rounded-lg shadow-lg glowing-border"
+                        style={{ backgroundColor: '#9149ff', zIndex: '100' }}
+                        className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 p-4 text-white rounded-lg shadow-lg glowing-border signup-popup-container"
                         initial={{ opacity: 0, y: -100, x: 180 }}
                         animate={{ opacity: 1, y: 90, x: 180 }}
                         transition={{ duration: 0.5, ease: "easeOut" }}
@@ -70,7 +70,7 @@ function SignUp() {
             </div>
 
             {/* Right Side: Form */}
-            <div className="flex items-center justify-center w-full md:w-1/2 bg-gradient-to-br from-[#c4a6ff] to-[#f699ff] p-10">
+            <div className="flex items-center justify-center w-full lg:w-1/2 bg-gradient-to-br from-[#c4a6ff] to-[#f699ff] p-10">
                 <div className="w-full max-w-lg bg-white rounded-xl shadow-lg p-10">
                     <div className="mb-6 flex justify-center">
                         <span className="inline-block w-full max-w-[100px]">
@@ -91,7 +91,7 @@ function SignUp() {
                     {error && <p className="text-red-500 text-center mb-4">{error}</p>}
 
                     {/* Form */}
-                    <form onSubmit={handleSubmit(signUp)} className="space-y-6">
+                    <form onSubmit={handleSubmit(signUp)} className="space-y-6 form-container">
                         <div className="relative">
                             <Input
                                 label="Full Name:"
